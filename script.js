@@ -18,7 +18,6 @@ let possibleCombinations = [
 	["FO", "1568"]
 ];
 
-
 document.addEventListener("DOMContentLoaded", restart);
 document.addEventListener('keydown', function(event) {
     handleInput(event);
@@ -68,7 +67,7 @@ function startTimer() {
 }
 
 function handleInput(event) {
-    if (event.key == ' ' || event.key == 'Escape') {
+    if (event.key == ' ' || event.key == 'Escape' || event.key == 'Enter') {
 		if (event.repeat) return;
 		handleSpace();
 	}
@@ -102,11 +101,8 @@ function handleInput(event) {
 			break;
 		break;
 		case 'm':
-			if (!bool_moreInfo) {
-				bool_moreInfo = true;
-			} else {
-				bool_moreInfo = false;
-			}
+			if (!bool_moreInfo) bool_moreInfo = true;
+			else bool_moreInfo = false;
 			if (bool_moreInfo) {
 				for (let i = 0; i < possibleCombinations.length; i++) {
 					possibleCombinations[i][0] += moreInfo[i];
@@ -213,3 +209,4 @@ function decrement(i) {
     if (i <= 0) {return 9}
     else {return i - 1};
 }
+
