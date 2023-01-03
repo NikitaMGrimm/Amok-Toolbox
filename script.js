@@ -7,6 +7,17 @@ let running;
 let interval;
 let solution;
 let solved;
+let moreInfo = ["EF", "EO", "EF", "OE", "EN"];
+let rand = 0;
+let bool_moreInfo = false;
+let possibleCombinations = [
+	["ON", "5861"],
+	["NF", "8165"],
+	["NO", "8561"],
+	["FN", "1856"],
+	["FO", "1568"]
+];
+
 
 document.addEventListener("DOMContentLoaded", restart);
 document.addEventListener('keydown', function(event) {
@@ -28,14 +39,9 @@ function restart() {
 }
 
 function setSolution() {
-    let possibleCombinations = [
-        ["ON", "5861"],
-        ["NF", "8165"],
-        ["NO", "8561"],
-        ["FN", "1856"],
-        ["FO", "1568"]
-    ];
-    let rand = Math.floor(Math.random() * 5)
+	rand = Math.floor(Math.random() * 5)
+    
+	
     solution = possibleCombinations[rand];
     console.log(solution);
 }
@@ -62,22 +68,63 @@ function startTimer() {
 }
 
 function handleInput(event) {
-    if (event.key == ' ' || event.key == 'Escape') handleSpace();
-    if (!running) return;
+    if (event.key == ' ' || event.key == 'Escape') {
+		if (event.repeat) return;
+		handleSpace();
+	}
+    
     switch(event.key) {
         case 'w':
-            handleVert("up");
+			if (event.repeat) return;
+			if (running) handleVert("up");
             break;
         case 's':
-            handleVert("down");
+			if (event.repeat) return;
+            if (running) handleVert("down");
             break;
         case 'a':
+			if (event.repeat) return;
             handleHoriz("left");
+			if (!running) handleSpace();
             break;
         case 'd':
+		    if (event.repeat) return;
             handleHoriz("right");
+			if (!running) handleSpace();
             break;
+		case 'h':
+			let displayStyle = document.querySelector("#combos").style.display;
+			if (displayStyle === "none") {
+				document.querySelector("#combos").style.display = "block";
+			} else {
+				document.querySelector("#combos").style.display = "none";
+			}
+			break;
+		break;
+		case 'm':
+			if (!bool_moreInfo) {
+				bool_moreInfo = true;
+			} else {
+				bool_moreInfo = false;
+			}
+			if (bool_moreInfo) {
+				for (let i = 0; i < possibleCombinations.length; i++) {
+					possibleCombinations[i][0] += moreInfo[i];
+				}
+			} else {
+				possibleCombinations = [
+				["ON", "5861"],
+				["NF", "8165"],
+				["NO", "8561"],
+				["FN", "1856"],
+				["FO", "1568"]
+				];
+			}	
+			restart();
+			break;
+			
     }
+	if (!running) return;
     if (!solved && running) {
         checkSolved();
     }
@@ -137,8 +184,8 @@ function selectColumn(index) {
 
 function setNumbers() {
     for (let i in n) {
-        n[i].innerText = numbers[i];
-    }
+        n[i].innerText = numbers[i];		
+	}
 }
 
 function incrementSelectedColumn() {
