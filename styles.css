@@ -48,7 +48,7 @@ body {
 }
 
 .top, .bot {
-    color: #CCC;
+    color: rgb(175, 170, 170);
 }
 
 .number {
