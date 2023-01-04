@@ -172,9 +172,9 @@ function selectColumn(index) {
         next = 0;
     } else next = index;
     for (let i of columns) {
-        i.setAttribute("style", "border-color: white");
+        i.setAttribute("style", "border-color: rgba(111,111,111,0.2) transparent;");
     }
-    columns[next].setAttribute("style", "border-color: black");
+    columns[next].setAttribute("style", "border-color: grey");
     selected = next;
 }
 

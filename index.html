@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="mlem.ico">
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fcmam5/nightly.js@v1.0/dist/nightly.min.js"></script>
 </head>
 <body>
     <div id="info">
@@ -48,5 +49,19 @@
         FO - 1568<br>
         FN - 1856
     </div>
+
+    <h1>
+        <button type="button" name="button" id="btn">Toggle Dark/White colors</button>
+    </h1>
+
+    <script src="../src/nightly.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      // Persistence disabled
+      var Nightly = new Nightly();
+      document.getElementById("btn").addEventListener("click", function(){
+        Nightly.toggle();
+      });
+    
+    </script>
 </body>
 </html>
